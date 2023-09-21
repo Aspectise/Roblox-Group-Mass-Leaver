@@ -52,7 +52,7 @@ def main(settings):
                     print(Fore.GREEN + f"Left group: {group_name} (ID: {group_id})")
                     groups_left += 1
                 else:
-                    print(Fore.RED + f"Failed to leave group: {group_name} (ID: {group_id})")
+                    print(Fore.RED + f"Failed to leave group: {group_name} (ID: {group_id}) {response.status_code}")
             else:
                 print(Fore.YELLOW + f"Not leaving group: {group_name} (ID: {group_id})")
 
