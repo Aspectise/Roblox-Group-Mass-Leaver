@@ -42,7 +42,7 @@ def main(settings):
         group_rank = group["role"]['rank']
 
         if group_id not in whitelist:
-            leave = 'y' if mass_leave else input(Fore.LIGHTRED_EX + f"Do you want to leave group {group_name} (ID: {group_id})? (y/n): ").strip().lower()
+            leave = 'y' if mass_leave else print(Fore.YELLOW + f"Skipping group (owned): {group_name} (ID: {group_id})") if group_rank == 255 else input(Fore.LIGHTRED_EX + f"Do you want to leave group {group_name} (ID: {group_id})? (y/n): ").strip().lower()
             if leave == 'y':
                 if group_rank == 255:
                     print(Fore.YELLOW + f"Skipping group (owned): {group_name} (ID: {group_id})")
