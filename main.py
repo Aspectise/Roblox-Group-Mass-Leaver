@@ -42,15 +42,13 @@ def main(settings):
         group_rank = group["role"]['rank']
 
         if group_id not in whitelist:
-            if group_rank == 255:
-                print(Fore.YELLOW + f"Skipping group (owned): {group_name} (ID: {group_id})")
-            else:
-                leave = 'y' if mass_leave else input(Fore.LIGHTRED_EX + f"Do you want to leave group {group_name} (ID: {group_id})? (y/n): ").strip().lower()
-
-                if leave == 'y':
+            leave = 'y' if mass_leave else input(Fore.LIGHTRED_EX + f"Do you want to leave group {group_name} (ID: {group_id})? (y/n): ").strip().lower()
+            if leave == 'y':
+                if group_rank == 255:
+                    print(Fore.YELLOW + f"Skipping group (owned): {group_name} (ID: {group_id})")
+                else:
                     response = requests.post('https://accountsettings.roblox.com/v1/email', cookies={".ROBLOSECURITY": cookie})
                     csrf = response.headers['x-csrf-token']
-                
                     response = requests.delete(f'https://groups.roblox.com/v1/groups/{group_id}/users/{id}', cookies={".ROBLOSECURITY": cookie}, headers={"x-csrf-token": csrf})
                     if response.status_code == 200:
                         print(Fore.GREEN + f"Left group: {group_name} (ID: {group_id})")
