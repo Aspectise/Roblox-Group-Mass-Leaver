@@ -40,7 +40,7 @@ def main(settings):
         group_name = group['group']['name']
         group_id = group['group']['id']
 
-        if mass_leave or group_id not in whitelist:
+        if not mass_leave and group_id not in whitelist:
             leave = 'y' if mass_leave else input(Fore.LIGHTRED_EX + f"Do you want to leave group {group_name} (ID: {group_id})? (y/n): ").strip().lower()
 
             if leave == 'y':
@@ -53,8 +53,8 @@ def main(settings):
                     groups_left += 1
                 else:
                     print(Fore.RED + f"Failed to leave group: {group_name} (ID: {group_id}) {response.status_code}")
-            else:
-                print(Fore.YELLOW + f"Not leaving group: {group_name} (ID: {group_id})")
+        else:
+            print(Fore.YELLOW + f"Skipping group: {group_name} (ID: {group_id})")
 
     print(Fore.MAGENTA + f"Left {groups_left} groups.")
     os.system("pause")
