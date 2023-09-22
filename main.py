@@ -40,7 +40,7 @@ def main(settings):
         group_name = group['group']['name']
         group_id = group['group']['id']
 
-        if not mass_leave and group_id not in whitelist:
+        if group_id not in whitelist:
             leave = 'y' if mass_leave else input(Fore.LIGHTRED_EX + f"Do you want to leave group {group_name} (ID: {group_id})? (y/n): ").strip().lower()
 
             if leave == 'y':
