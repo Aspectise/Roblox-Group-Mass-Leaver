@@ -52,8 +52,8 @@ class massLeave:
                 else:
                     total_retries = 0
                     while total_retries < 2:
-                        response = requests.delete(f'https://groups.roblox.com/v1/groups/{self.user_id}/users/{group_id}', cookies={".ROBLOSECURITY": self.cookie}, headers={"x-csrf-token": self.csrf})
-                        if response.status_code == 200:
+                        response = requests.delete(f'https://groups.roblox.com/v1/groups/{group_id}/users/{self.user_id}', cookies={".ROBLOSECURITY": self.cookie}, headers={"x-csrf-token": self.csrf})
+                        if response.status_code == 200:        
                             self.groups_left += 1
                             return print(Fore.GREEN + f"Left group: {group_name} (ID: {group_id})")
                         elif response.status_code == 401:
